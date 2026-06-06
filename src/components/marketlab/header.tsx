@@ -1,9 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { HeaderAuth } from "@/components/marketlab/header-auth";
 import { ThemeToggle } from "@/components/marketlab/theme-toggle";
+import { getCurrentProfile, getCurrentUser } from "@/lib/profile/queries";
 
-export function Header() {
+export async function Header() {
+  const user = await getCurrentUser();
+  const profile = user ? await getCurrentProfile() : null;
+
   return (
     <header className="border-b border-border bg-background text-foreground">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
@@ -21,22 +26,24 @@ export function Header() {
               MarketLab
             </span>
           </Link>
-          <nav>
+          <nav className="flex items-center gap-4">
             <Link
               href="/markets"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               Markets
             </Link>
+            <Link
+              href="/positions"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              My Positions
+            </Link>
           </nav>
         </div>
 
         <div className="flex items-center gap-3">
-          <div
-            className="hidden sm:block"
-            data-testid="auth-placeholder"
-            aria-hidden="true"
-          />
+          <HeaderAuth user={user} profile={profile} />
           <ThemeToggle />
         </div>
       </div>

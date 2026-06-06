@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { BuyPlaceholder } from "@/components/marketlab/buy-placeholder";
+import { MarketBuySection } from "@/components/marketlab/market-buy-section";
 import { MarketStatusBadge } from "@/components/marketlab/market-status-badge";
 import { ProbabilityChart } from "@/components/marketlab/probability-chart";
 import { Button } from "@/components/ui/button";
@@ -99,7 +99,7 @@ export default async function MarketDetailPage({
             </CardContent>
           </Card>
 
-          <BuyPlaceholder market={market} />
+          <MarketBuySection market={market} />
         </div>
       </div>
     </div>
